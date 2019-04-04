@@ -1,0 +1,10 @@
+#BlueJ class context
+comment0.target=EconomySeats
+comment0.text=\r\n\ Store\ information\ specific\ to\ economy\ class\ seats.\r\n\r\n\ @Author\ Mathias\ \u00D8stensen\r\n\ @version\ 1.0,\ 27.05.2018\r\n
+comment1.params=
+comment1.target=EconomySeats()
+comment1.text=\r\n\ Initialize\ the\ price\ of\ economy\ class\ seat\ objects.\r\n
+comment2.params=
+comment2.target=int\ getPrice()
+comment2.text=\r\n\ Return\ the\ price\ of\ the\ seat.\r\n\ @return\ The\ price\ of\ the\ seat.\r\n
+numComments=3

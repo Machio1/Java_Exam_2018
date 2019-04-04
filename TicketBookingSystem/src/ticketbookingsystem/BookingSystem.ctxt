@@ -1,0 +1,25 @@
+#BlueJ class context
+comment0.target=BookingSystem
+comment0.text=\r\n\ Create\ an\ Airplane\ object.\r\n\ Create\ a\ list\ with\ Ticket\ objects\ with\ information\ about\ tickets.\r\n\r\n\ @Author\ Mathias\ \u00D8stensen\r\n\ @version\ 1.0,\ 27.05.2018\r\n
+comment1.params=
+comment1.target=BookingSystem()
+comment1.text=\r\n\ Create\ new\ HashMap\ with\ Ticket\ objects\ with\ String\ as\ key,\ and\ new\ ArrayList\ that\ registers\ price\ of\ tickets\ sold.\r\n
+comment2.params=flightRoute\ flightTime\ flightName\ flightGate
+comment2.target=void\ newFlight(java.lang.String,\ java.lang.String,\ java.lang.String,\ java.lang.String)
+comment2.text=\r\n\ Create\ Airplane\ object.\r\n\ @param\ flightRoute\ The\ route\ the\ flight\ travels.\r\n\ @param\ flightTime\ The\ time\ the\ plane\ leaves.\r\n\ @param\ flightName\ The\ name\ of\ the\ flight.\r\n\ @param\ flightGate\ The\ gate\ the\ flight\ leaves\ from.\r\n
+comment3.params=seatRow\ seatCol\ passengerName
+comment3.target=void\ newTicket(int,\ int,\ java.lang.String)
+comment3.text=\r\n\ Create\ new\ ticket\ to\ flight\ in\ passenger's\ name,\ and\ reserve\ seat\ if\ it's\ unoccupied.\r\n\ Register\ ticket\ in\ ticketList\ and\ ticketSold.\r\n\ @param\ seatRow\ The\ row\ where\ the\ seat\ is\ located.\r\n\ @param\ seatCol\ The\ collum\ where\ the\ seat\ is\ located.\r\n\ @param\ passengerName\ Name\ of\ passenger\r\n
+comment4.params=passengerName
+comment4.target=void\ printTicket(java.lang.String)
+comment4.text=\ \r\n\ Find\ and\ print\ ticket\ in\ passenger's\ name.\r\n\ @param\ passengerName\ Name\ of\ passenger\ the\ ticket\ is\ registered\ to.\r\n
+comment5.params=passengerName
+comment5.target=java.lang.String\ search(java.lang.String)
+comment5.text=\ \r\n\ Find\ ticket\ number\ registered\ in\ passenger's\ name.\r\n\ @param\ passengerName\ Name\ of\ passenger\ the\ ticket\ is\ registered\ to.\r\n\ @return\ Ticket\ number\ as\ String.\r\n
+comment6.params=
+comment6.target=void\ printSales()
+comment6.text=\ \r\n\ Print\ complete\ list\ of\ price\ of\ all\ tickets\ sold,\ and\ adds\ them\ together.\ \r\n
+comment7.params=
+comment7.target=void\ printPassengerList()
+comment7.text=\r\n\ Print\ list\ of\ all\ passengers\ registered\ for\ the\ flight.\r\n
+numComments=8
