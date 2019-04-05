@@ -1,0 +1,220 @@
+package src.ticketbookingsystem;
+import java.util.HashMap;
+import java.util.Iterator;
+
+/**
+ * Register and store all information about flights, and keeps a list of all seats,
+ * and a list of all passengers and where they sit.
+ *
+ * @Author Mathias Østensen
+ * @version 1.0, 27.05.2018
+ */
+public class Airplane
+{
+    private String route;
+    private String time; 
+    private String flightName;
+    private String gate;
+    private Seats[][] seatList;
+    private HashMap<String, String> passengerList;
+    
+    /**
+     * Initialize Airplane object.
+     * Create new HashMap for passenger list.
+     * Create 2D Array with 70 rows and 7 collums.
+     * @param route The route the flight travels.
+     * @param time The time the flight leaves.
+     * @param flightName The name of the flight.
+     * @param gate The name of the gate the flight leaves from.
+     * @param numRows Number of rows in seatList.
+     * @param numCols Number of collums in seatList.
+     */
+    public Airplane(String route, String time, String flightName, String gate) {
+        this.route = route;
+        this.time = time;
+        this.flightName = flightName;
+        this.gate = gate;
+        passengerList = new HashMap<>();
+        setSeats(70, 7);
+    }    
+    
+    /**
+     * Fill seatList with empty Seat objects.
+     * @param numRows Number of rows in seatList.
+     * @param numCols Number of collums in seatList.
+     */
+    private void setSeats(int numRows, int numCols){
+         //create new Seat object for every cell in the seatLsit Array
+         seatList = new Seats[numRows][numCols];
+         for(int row = 0; row < numRows; row++) {
+            for (int col = 0; col < numCols; col++) {
+                if (row > 20){
+                    seatList[row][col] = new EconomySeats();
+                }
+                else{
+                    seatList[row][col] = new BusinessSeats();                
+                }
+            }
+         }
+        }
+        
+    /**
+     * Reserves seat in the seatList and sets it as "occupied".
+     * Register seat number as String and passenger name in
+     * passengerList.
+     * @param seatRow Row-placement of seat.
+     * @param seatCol Collum-placement of seat.
+     * @param passenger Name of passenger.
+     */
+    public void reserveSeat(int seatRow, int seatCol, String passenger){
+        //store Seat object from list
+        Seats seat = seatList[seatRow][seatCol];
+        if(seat.getStatus() == false){
+            //create seat number String
+            String seatNum = "Row: " + seatRow + " Seat: " + seatCol;
+            
+            //change seat status to "occupied" (occupied = true)
+            seat.setStatus(true);        
+            //register passenger and seat in passengerList
+            setPasSeat(passenger, seatNum);
+        }
+        else{
+            throw new IllegalStateException("Seat status is occupied");
+        }        
+    }
+        
+    /**
+     * Get seat status. "Occupied" true or false.
+     * @param row Seat placement in row.
+     * @param col Seat placement in collum.
+     * @return Boolean seat status.
+     */
+    public boolean getSeatStatus(int row, int col){
+        if(seatList[row][col] != null){
+            return seatList[row][col].getStatus();    
+        }
+        else{
+            throw new IllegalStateException("seatList must not be null.");
+        }
+    }
+    
+    /**
+     * Enter passenger and seat String into passengerList.
+     * @param passenger Passenger's name.
+     * @param seatNum Seat number in String format.
+     */
+    public void setPasSeat(String passenger, String seatNum){
+        //this is only public to work with test class
+        //can be set to private without test class
+        passengerList.put(passenger, seatNum);
+    }
+    
+    /**
+     * Return Passenger name and their seat number.
+     * If no passenger is registered to the seat, returns error message.
+     * @param passenger Name of passenger.
+     * @return Returns String with name and seat number.
+     */
+    public String getPasSeat(String passenger){
+        if(pasKeyInUse(passenger)){
+            String seat = passengerList.get(passenger);            
+            return "Name: " + passenger + " " + seat;            
+        }
+        else{
+            throw new IllegalArgumentException("Key not in use.");
+        }
+    }
+    
+    /**
+     * Print list of all passengers registered for the flight.
+     */
+    public void printPassengerList(){
+        Iterator it = passengerList.entrySet().iterator();
+        while (it.hasNext()) {
+            HashMap.Entry pair = (HashMap.Entry)it.next();
+            System.out.println(pair.getKey() + " = " + pair.getValue());
+        }
+    }
+    
+    /**
+     * Get flight route.
+     * @return Flight route.
+     */
+    public String getRoute(){
+        if(route != null){
+            return route;
+        }
+        else{
+            throw new IllegalStateException("route must not be null.");
+        }
+    }
+    
+    /**
+     * Get flight time.
+     * @return Flight time.
+     */
+    public String getTime(){
+        if(time != null){
+            return time;
+        }
+        else{
+            throw new IllegalStateException("time must not be null.");
+        }
+    }
+    
+    /**
+     * Get flight name.
+     * @return Flight name.
+     */
+    public String getName(){
+        if(flightName != null){
+            return flightName;
+        }
+        else{
+            throw new IllegalStateException("flightName must not be null.");
+        }
+    }
+    
+    /**
+     * Get flight gate.
+     * @return Flight gate.
+     */
+    public String getGate(){        
+        if(gate != null){
+            return gate;
+        }
+        else{
+            throw new IllegalStateException("gate must not be null.");
+        }
+    }
+    
+    /**
+     * Get seat price.
+     * @param row Seat row placement.
+     * @param col Seat collum placement.
+     * @return Seat price.
+     */
+    public int getPrice(int row, int col){                
+        if(seatList[row][col] != null){
+            //call getPrice method in seat object and return it as int.
+            return seatList[row][col].getPrice(); 
+        }
+        else{
+            throw new IllegalStateException("Seat in seatList must not be null.");
+        }
+    }    
+    
+    /**
+     * Return whether or not the current key is in use.
+     * @param key The name to be looked up.
+     * @return true if the key is in use, false otherwise.
+     */
+    public boolean pasKeyInUse(String key)
+    {
+        return passengerList.containsKey(key);
+    }
+   }
+   
+
+
+

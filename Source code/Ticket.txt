@@ -1,0 +1,118 @@
+package src.ticketbookingsystem;
+import java.util.Random;
+
+/**
+ * Registers everything that needs to be printed on the ticket, and generates a ticket number.
+ *
+ * @Author Mathias Østensen
+ * @version 1.0, 27.05.2018
+ */
+public class Ticket
+{
+    private int ticketNumber;
+    private Random randomGenerator;
+    private String flight;
+    private String passenger;
+    private String seatNumber;    
+    
+    /**
+     * Create new Random object and set a random number as ticket number.
+     * Set passenger name.
+     * @param passengerName Name of passenger.
+     */
+    public Ticket(String passengerName) {
+        //create random number generator
+        randomGenerator = new Random();
+        //set number size to 8 digits
+        int random = 10000000 + randomGenerator.nextInt(90000000);
+        //set ticket number and passenger name
+        this.ticketNumber = random;        
+        this.passenger = passengerName;
+    }
+    
+    /**
+     * Print ticket.
+     */
+    public void printTicket(){
+        System.out.println("_____________________________________________________________________");
+        System.out.println("TICKET NUMBER: " + getTicketNumber() + "   NAME: " + getPassenger());
+        System.out.println();
+        System.out.println(getFlight());
+        System.out.println(getSeatNum());
+        System.out.println("_____________________________________________________________________");
+        System.out.println();        
+    }
+    
+    /**
+     * Return ticket number.
+     * @return Ticket number.
+     */
+    private int getTicketNumber() {
+        return ticketNumber;
+    }
+    
+    /**
+     * Return ticket number as String.
+     * @return Ticket number as String.
+     */
+    public String getTicketString() {
+        return "" + ticketNumber;
+    }
+    
+    /**
+     * Return passenger name.
+     * @return Passenger name.
+     */
+    private String getPassenger(){
+        return passenger;
+    }
+        
+    /**
+     * Set passenger name.
+     * @param passenger Name of passenger.
+     */
+    public void setPassenger(String passenger){
+        this.passenger = passenger;
+    }
+    
+    /**
+     * Return flight information String.
+     * @return Flight information String.
+     */
+    private String getFlight(){
+        if(flight != null){
+            return flight;
+        }
+        else{
+            throw new IllegalStateException("flight must not be null.");
+        }
+    }
+
+    /**
+     * Set flight information.
+     * @param flight information.
+     */
+    public void setFlight(String flight){
+        this.flight = flight;
+    }
+
+    /**
+     * Return seat number String.
+     * @return Seat number String.
+     */
+    private String getSeatNum(){
+        if(seatNumber != null){
+            return seatNumber;
+        }
+        else{
+            throw new IllegalStateException("seatNumber must not be null.");
+        }
+    }
+    
+    /**
+     * Set seat number.
+     */
+    public void setSeatNum(String seatNumber){
+        this.seatNumber = seatNumber;
+    }    
+}
